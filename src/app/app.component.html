@@ -1,0 +1,33 @@
+<section  class="Project-sectioncontact d-flex d-md-block justify-content-center align-items-center text-center" id="contact">
+    <div class="container contactinfo">
+      <div class="row d-flex d-md-block justify-content-center align-items-center text-center contactinfo1 ">
+      <h3 class="text-white fw-bolder">SatCop<span class="text-warning fw-bolder mx-2">HR</span></h3>
+    </div></div>
+    <div class="container contact-page d-flex justify-content-center align-items-center">
+      <div class="row contact-row-page ">
+        <div class="col-lg-6  contact-row-page2 ">
+            <img class="hrimage d-flex d-md-block justify-content-center align-items-center text-center" src="Metrics-cuate.png">
+        </div> 
+       <div class="col-lg-6 ">
+         <form class="text-white mt-3 needs-validation fromdiv " (ngSubmit)="login()" id="contactForm" method="get" name="fromdata" novalidate>
+        <div class="mb-4">
+          <label class="form-label d-flex justify-content-start">UserId</label>
+          <input type="text" name="userId" [(ngModel)]="userId" id="name1" class="form-control" required pattern="[A-Za-z\s]+">
+          <div class="invalid-feedback">Please enter a valid name (letters only).</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label d-flex justify-content-start ">Password</label>
+          <input type="password" class="form-control" [(ngModel)]="password" name="password" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+          <div class="invalid-feedback">Please enter a valid email.</div>
+        </div>
+        
+        <div class="container d-flex d-md-block justify-content-center align-items-center mt-5 submitbtn">
+          <div class="row  d-flex d-md-block justify-content-center align-items-center">
+        <button type="submit" class="btn text-white donlodbtn fw-bolder  rounded-pill" name="submit" >Login</button>
+        </div></div> 
+      </form>
+      </div>
+      </div>
+    </div>
+  </section>
+  <router-outlet></router-outlet>
