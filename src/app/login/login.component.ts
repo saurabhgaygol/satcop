@@ -19,16 +19,19 @@ constructor(private http: HttpClient, private router: Router) {}
 
 login()
 {
-  const apiUrl='https://script.google.com/macros/s/AKfycbwvApBpjcyB29iQ3dX47M7LxweE36mR--I_EOotipcas5kfrC0F5unovFMr2BG2p4Pwpg/exec';
+  const apiUrl='https://script.google.com/macros/s/AKfycbyCO2NNWAuNvloO_6wI1hYLqODs63li8-Am3tAL6gzC4rV3xGczoduH7oyIWQKoZdTx_Q/exec';
+ 
 
   this.http.get<any[]>(apiUrl).subscribe(users =>{
     const user=users.find(u => u.userId === this.userId && u.password === this.password);
 
     if (user) {
     
-        localStorage.setItem('role', user.role);
+        
+        sessionStorage.setItem('userdata', JSON.stringify(user));
         alert('Login Successful as ' + user.Name);
         
+       
         this.userId = '';
         this.password = '';
        
