@@ -25,3 +25,12 @@
     opacity: 0.5;
 }
 
+.custom-container {
+    width: 100%;
+  }
+
+  @media (min-width: 1334px) {
+    .custom-container {
+      width: 93%;
+    }
+  }
