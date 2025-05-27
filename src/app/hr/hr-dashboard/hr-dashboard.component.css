@@ -26,11 +26,11 @@
 }
 
 .custom-container {
-    width: 100%;
+    width: 93%;
   }
 
   @media (min-width: 1200px) {
     .custom-container {
-      width: 93%;
+      width: 100%;
     }
   }
