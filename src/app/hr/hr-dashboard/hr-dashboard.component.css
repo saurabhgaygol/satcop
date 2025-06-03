@@ -22,9 +22,15 @@
   opacity: 0.5;
 }
 
-.custom-container {
-  width: 100%;
+
+
+@media (min-width: 1200px) {
+  .custom-container {
+    width: 100%;
+  }
 }
+
+
 
 
 @media (min-width: 1335px) and (max-width: 1600px) {
@@ -53,5 +59,4 @@
 
 .tranpert {
   background-color: rgba(0, 0, 0, 0.85);
-
 }

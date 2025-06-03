@@ -17,7 +17,7 @@ export class HrDashboardComponent implements OnInit {
   //veriable
   showNotification = false;
   userName: any;
-  showchangepassword = false;
+
 
 
 
