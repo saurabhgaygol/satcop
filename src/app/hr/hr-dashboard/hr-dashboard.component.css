@@ -1,31 +1,29 @@
-.offer_letter_page
-{
+.offer_letter_page {
   width: 100%;
   height: 100vh;
 
 }
 
-.task_bar
-{
-  
-  display:flex;
+.task_bar {
+
+  display: flex;
   width: 120px;
   height: 100vh;
   position: fixed;
-  
+
 }
 
 
 .custom-border:focus,
 
-.custom-border:active
- {
-    border: 1px solid white;
-    outline: none;
-    opacity: 0.5;
+.custom-border:active {
+  border: 1px solid white;
+  outline: none;
+  opacity: 0.5;
 }
 
 .custom-container {
+<<<<<<< HEAD
     width: 93%;
   }
 
@@ -34,3 +32,37 @@
       width: 100%;
     }
   }
+=======
+  width: 100%;
+}
+
+
+@media (min-width: 1335px) and (max-width: 1600px) {
+  .custom-container {
+    width: 93%;
+  }
+}
+
+
+@media (min-width: 1000px) and (max-width: 1335px) {
+  .custom-container {
+    width: 94.4%;
+  }
+}
+
+@media (min-width: 1601px) {
+  .custom-container {
+    width: 94.4%;
+  }
+}
+
+
+
+
+
+
+.tranpert {
+  background-color: rgba(0, 0, 0, 0.85);
+
+}
+>>>>>>> f0ece75 (oferleter upadated And change password updated)

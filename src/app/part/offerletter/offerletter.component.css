@@ -1,0 +1,13 @@
+.no-relative,
+.no-relative .form-control,
+.no-relative .input-group-text {
+    position: static !important;
+}
+
+.preview-scale {
+    transform: scale(0.4);
+    /* You can reduce it further if needed */
+    transform-origin: top left;
+    width: 125%;
+    /* Compensate scaling so layout looks normal */
+}
