@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { NotificationComponent } from "../../part/notification/notification.component";
 import { CommonModule } from '@angular/common';
-
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 
 @Component({
@@ -17,12 +17,12 @@ export class HrDashboardComponent implements OnInit {
   //veriable
   showNotification = false;
   userName: any;
-
+  profileimage!: SafeUrl;
 
 
 
   //constracter
-  constructor(private router: Router) { }
+  constructor(private router: Router, private sanitizer: DomSanitizer) { }
 
   //method to show user longin
   ngOnInit(): void {
@@ -31,6 +31,16 @@ export class HrDashboardComponent implements OnInit {
       const userObj = JSON.parse(data);
       this.userName = userObj.userId;
 
+      const originalUrl = userObj.profileImages;
+
+      // Convert Google Drive link to direct viewable URL
+      if (originalUrl.includes('drive.google.com')) {
+        const fileId = originalUrl.split('/d/')[1]?.split('/')[0];
+        const imageUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+        this.profileimage = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+      } else {
+        this.profileimage = originalUrl;
+      }
     }
   }
 
