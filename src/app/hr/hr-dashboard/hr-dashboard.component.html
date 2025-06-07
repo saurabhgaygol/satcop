@@ -4,7 +4,7 @@
       <div class="col-lg-2 task_bar d-flex d-md-block justify-content-center align-items-center text-center"
         style="background-color: black; position: fixed;">
         <div class="d-flex d-md-block justify-content-center align-items-center text-center">
-          <img class="rounded-circle my-4" [src]="profileimage"
+          <img [src]="profileimage" class="rounded-circle my-4"
             style="width: 80px; height: 80px; margin-left: 15px; object-fit: cover;" alt="Profile Image" />
 
         </div>
@@ -73,7 +73,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Hello, world! This is a modal.
+        <app-changepassword></app-changepassword>
       </div>
     </div>
   </div>

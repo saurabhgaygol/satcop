@@ -80,7 +80,7 @@ export class OfferletterComponent {
 
     try {
       const canvas = await html2canvas(element, {
-        scale: 3,
+        scale: 15,
         useCORS: true,
       });
 
@@ -88,7 +88,7 @@ export class OfferletterComponent {
       element.style.margin = originalMargin;
       element.style.padding = originalPadding;
 
-      const imgData = canvas.toDataURL('image/png');
+      const imgData = canvas.toDataURL('image/jpeg', 0.95);
       const pdf = new jsPDF({
         orientation: 'portrait',
         unit: 'mm',
@@ -102,9 +102,8 @@ export class OfferletterComponent {
       const imgWidth = pdfWidth;
       const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
 
-      const heightToUse = imgHeight > pdfHeight ? pdfHeight : imgHeight;
 
-      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, heightToUse);
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
 
       pdf.save(`${this.form.firstName}_OfferLetter.pdf`);
 

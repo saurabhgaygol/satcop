@@ -3,12 +3,13 @@ import { Router, RouterLink, RouterModule } from '@angular/router';
 import { NotificationComponent } from "../../part/notification/notification.component";
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ChangepasswordComponent } from "../../part/changepassword/changepassword.component";
 
 
 @Component({
   selector: 'app-hr-dashboard',
   standalone: true,
-  imports: [RouterLink, RouterModule, NotificationComponent, CommonModule],
+  imports: [RouterLink, RouterModule, NotificationComponent, CommonModule, ChangepasswordComponent],
   templateUrl: './hr-dashboard.component.html',
   styleUrls: ['./hr-dashboard.component.css']
 })
@@ -30,17 +31,17 @@ export class HrDashboardComponent implements OnInit {
     if (data) {
       const userObj = JSON.parse(data);
       this.userName = userObj.userId;
-
       const originalUrl = userObj.profileImages;
 
-      // Convert Google Drive link to direct viewable URL
-      if (originalUrl.includes('drive.google.com')) {
-        const fileId = originalUrl.split('/d/')[1]?.split('/')[0];
-        const imageUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
-        this.profileimage = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
-      } else {
-        this.profileimage = originalUrl;
+      let fileId = '';
+      if (originalUrl.includes('id=')) {
+        fileId = originalUrl.split('id=')[1];
+      } else if (originalUrl.includes('/d/')) {
+        fileId = originalUrl.split('/d/')[1]?.split('/')[0];
       }
+
+      const imageUrl = `https://drive.google.com/thumbnail?id=${fileId}`;
+      this.profileimage = imageUrl;
     }
   }
 

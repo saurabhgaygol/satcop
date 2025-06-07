@@ -9,6 +9,7 @@ import { ProfileComponent } from './part/profile/profile.component';
 import { NotificationComponent } from './part/notification/notification.component';
 import { OfferletterComponent } from './part/offerletter/offerletter.component';
 import { AppointmentletterComponent } from './part/appointmentletter/appointmentletter.component';
+import { ChangepasswordComponent } from './part/changepassword/changepassword.component';
 
 export const routes: Routes = [
   {
@@ -33,7 +34,8 @@ export const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'notification', component: NotificationComponent },
       { path: 'offerletter', component: OfferletterComponent },
-      { path: 'appointmentletter', component: AppointmentletterComponent }
+      { path: 'appointmentletter', component: AppointmentletterComponent },
+      { path: 'changepassword', component: ChangepasswordComponent }
 
     ]
 

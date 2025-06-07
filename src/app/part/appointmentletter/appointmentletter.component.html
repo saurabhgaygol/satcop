@@ -1,1 +1,272 @@
-<p>appointmentletter works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <form class="col-lg-3 " style="height:fit-content;" #offerForm="ngForm" (ngSubmit)="submitForm()" novalidate>
+            <h2 class="text-center pb-3"><b>Appointment letter</b></h2>
+            <input class="form-control my-3" type="text" aria-label="default input example" [(ngModel)]="form.firstName"
+                name="firstName" placeholder="First name" required />
+            <input class="form-control my-3" type="text" aria-label="default input example" [(ngModel)]="form.lastName"
+                name="lastName" placeholder="Last name" required />
+            <input class="form-control my-3" type="text" placeholder="Email" aria-label="default input example"
+                [(ngModel)]="form.email" name="email" required />
+            <input class="form-control my-3" type="text" aria-label="default input example" [(ngModel)]="form.phone"
+                name="phone" placeholder="Phone no" required />
+            <input class="form-control my-3" type="text" aria-label="default input example" [(ngModel)]="form.position"
+                name="position" placeholder="Position" required />
+            <input id=" joiningDate my-3" placeholder="Joining Date" class="form-control " type="text"
+                aria-label="Joining Date" onfocus="(this.type='date')" [(ngModel)]="form.joiningDate"
+                name="joiningDate">
+
+            <div class="input-group mb-3 my-3 no-relative ">
+                <span class="input-group-text">INR</span>
+                <input class="form-control" placeholder="CTC Amount" id="amount" (input)="validateAmount($event)"
+                    [(ngModel)]="form.ctc" name="ctc" type="number" min="0" placeholder="CTC Amount" required />
+            </div>
+            @if (showError) {
+            <div class="text-danger">Amount must be greater than 0</div>
+            }
+
+            <input class="form-control my-3" type="text" aria-label="default input example" [(ngModel)]="form.address"
+                name="address" placeholder="Address" required />
+
+
+            <div class=" d-flex justify-content-center align-items-center">
+                <input class="form-check-input " type="radio" name="flexRadioDisabled" id="flexRadioDisabled"
+                    [(ngModel)]="form.company" name="company" value="Satcop India Pvt.Ltd" required />
+                <label class="form-check-label mx-1" for="flexRadioDisabled">
+                    Satcop India Pvt.Ltd
+                </label>
+
+
+                <input class="form-check-input ms-3" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled"
+                    [(ngModel)]="form.company" name="company" value="Bellbuny" required />
+                <label class="form-check-label mx-1 " for="flexRadioCheckedDisabled">
+                    Bellbuny
+                </label>
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center mt-5">
+                <button type="submit" class="btn btn-secondary text-center">
+                    Create Offer Letter
+                </button>
+            </div>
+
+
+        </form>
+
+
+        <!--
+<div class="container-fluid">
+  <div class="row">
+     LEFT SIDE: FORM 
+    <div class="col-lg-6">
+      <form #offerForm="ngForm" (ngSubmit)="submitForm()" novalidate>
+        <h2 class="text-center"><b>Offer Letter</b></h2>
+
+        <input class="form-control my-2" [(ngModel)]="form.firstName" name="firstName" placeholder="First name"
+          required />
+        <input class="form-control my-2" [(ngModel)]="form.lastName" name="lastName" placeholder="Last name" required />
+        <input class="form-control my-2" [(ngModel)]="form.email" name="email" placeholder="Email" required />
+        <input class="form-control my-2" [(ngModel)]="form.phone" name="phone" placeholder="Phone no" required />
+        <input class="form-control my-2" [(ngModel)]="form.position" name="position" placeholder="Position" required />
+        <input class="form-control my-2" [(ngModel)]="form.joiningDate" name="joiningDate"
+          pattern="\\d{2}-\\d{2}-\\d{4}" type="date" required />
+        <input class="form-control my-2" [(ngModel)]="form.ctc" name="ctc" type="number" min="1"
+          placeholder="CTC Amount" required />
+        <input class="form-control my-2" [(ngModel)]="form.address" name="address" placeholder="Address" required />
+
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" [(ngModel)]="form.company" name="company"
+            value="Satcop India Pvt.Ltd" required />
+          <label class="form-check-label">Satcop India Pvt.Ltd</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" [(ngModel)]="form.company" name="company" value="Bellbuny"
+            required />
+          <label class="form-check-label">Bellbuny</label>
+        </div>
+
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-secondary">Create Offer Letter</button>
+        </div>
+      </form>
+    </div>
+  -->
+
+        @if (submitted) {
+
+        <div class="col-lg-6 " style="margin-left: 10%;">
+            <h4 class="fs-1" style="margin-left: 15%;"><b>Preview</b></h4>
+
+            @if (form.company === 'Satcop India Pvt.Ltd') {
+            <div class="border   shadow bg-white text-black preview-scale " id="preview">
+                <img src="Copy of Letter Head.pdf.png" alt="" class="p-2"
+                    style="width: 101%; height: 85px; position: relative;">
+                <div style="padding-top: 80px; ">
+                    <div class="p-3" style="font-family: 'Times New Roman', Times, serif;">
+                        <p class="" style="font-size: 16px; margin-top: 70px; margin-left: 50px;">
+                            <strong>Date:</strong>
+                            {{formattedDate}}
+                        </p>
+
+                        <p class="text-center fw-bold"
+                            style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-decoration: underline;">
+                            Appointment letter</p>
+
+
+                        <p style="font-size: 16px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">To,</p>
+                        <p style="font-size: 16px; margin-top: 0px; margin-left: 50px;"><b>Dear {{ form.firstName }} {{
+                                form.lastName
+                                }},</b></p>
+
+                        <p
+                            style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                            With Reference to your subsequent interview, we are pleased to offer you the position of<br>
+                            <b>{{form.position}}</b> with <b> Satcop India Pvt. Ltd.</b> We are all excited about the
+                            potential that
+                            you
+                            <br>
+                            bring to our organization.
+                        </p>
+
+
+
+                        <p
+                            style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                            Your initial compensation package includes an annual ctc of <b>INR {{form.ctc}} </b>/- PA
+                            <br>
+                            (<b>{{ctcInWords}} only</b>).
+                        </p>
+
+                        <p
+                            style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                            You are required to join our organization on or before <b>{{form.joiningDate}}</b>.
+                        </p>
+
+
+                        <p
+                            style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                            We look forward to having you on board & wish you a rewarding career with us.
+                        </p>
+
+                        <p
+                            style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom:8px; margin-left: 50px;">
+                            With warm regards,
+                        </p>
+                        <p style="font-size: 16px; word-spacing: 2px; margin-bottom: 16px; margin-left: 50px;">
+                            For SatCop India Pvt Ltd.
+                        </p>
+
+                        <img src="abs.png" style="margin-left: 65px; width: 80px; margin-bottom: 16px;">
+
+                        <p style="font-size: 16px; word-spacing: 2px; margin-bottom: 16px; margin-left: 50px;">
+                            Director
+                        </p>
+
+                        <p style="font-size: 16px; word-spacing: 2px; margin-bottom: 14px; margin-left: 50px;">
+                            Birendra Jain
+                        </p>
+                    </div>
+                </div>
+                <img src="Copy of Letter Head.pdf (1).png" alt="" class="p-0"
+                    style="width: 101%; height: 85px; margin-top: 180px; margin-bottom: 0%;">
+
+            </div>
+
+
+            <div class="" style="margin-top: -660px;">
+                <button class="btn btn-success" (click)="downloadPDF()">Download PDF</button>
+            </div>
+
+            }
+
+
+            @if (form.company === 'Bellbuny') {
+            <div class="border   shadow bg-white text-black preview-scale " id="preview">
+                <img src="Yellow and Black Modern Studio Letterhead.png" alt="" class="pt-4"
+                    style="width: 100%; max-width: 1000px; height: auto; position: relative;">
+                <div style="padding-top: 80px; ">
+                    <div class="p-3" style="font-family: 'Times New Roman', Times, serif;">
+                        <p class="" style="font-size: 16px; margin-top: 70px; margin-left: 50px;">
+                            <strong>Date:</strong>
+                            {{formattedDate}}
+                        </p>
+
+                        <p class="text-center fw-bold"
+                            style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-decoration: underline;">
+                            Offer
+                            of Employment</p>
+
+
+                        <p style="font-size: 16px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">To,</p>
+                        <p style="font-size: 16px; margin-top: 0px; margin-left: 50px;"><b>Dear {{ form.firstName }} {{
+                                form.lastName
+                                }},</b></p>
+
+                        <p
+                            style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                            With Reference to your subsequent interview, we are pleased to offer you the position of<br>
+                            <b>{{form.position}}</b> with <b> Satcop India Pvt. Ltd.</b> We are all excited about the
+                            potential that
+                            you
+                            <br>
+                            bring to our organization.
+                        </p>
+
+
+
+                        <p
+                            style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                            Your initial compensation package includes an annual ctc of <b>INR {{form.ctc}} </b>/- PA
+                            <br>
+                            (<b>{{ctcInWords}} only</b>).
+                        </p>
+
+                        <p
+                            style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                            You are required to join our organization on or before <b>{{form.joiningDate}}</b>.
+                        </p>
+
+
+                        <p
+                            style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                            We look forward to having you on board & wish you a rewarding career with us.
+                        </p>
+
+                        <p
+                            style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom:8px; margin-left: 50px;">
+                            With warm regards,
+                        </p>
+                        <p style="font-size: 16px; word-spacing: 2px; margin-bottom: 16px; margin-left: 50px;">
+                            For SatCop India Pvt Ltd.
+                        </p>
+
+                        <img src="abs.png" style="margin-left: 65px; width: 80px; margin-bottom: 16px;">
+
+                        <p style="font-size: 16px; word-spacing: 2px; margin-bottom: 16px; margin-left: 50px;">
+                            Director
+                        </p>
+
+                        <p style="font-size: 16px; word-spacing: 2px; margin-bottom: 14px; margin-left: 50px;">
+                            Birendra Jain
+                        </p>
+                    </div>
+                </div>
+                <div
+                    style="height: 10px; background-color:  rgb(247, 175, 34); width: 100%; margin-top: 150px; margin-bottom: 50px;">
+                </div>
+
+            </div>
+
+
+            <div class="" style="margin-top: -700px;">
+                <button class="btn btn-success" (click)="downloadPDF()">Download PDF</button>
+            </div>
+
+
+
+            }
+        </div>
+        }
+
+    </div>
+</div>
