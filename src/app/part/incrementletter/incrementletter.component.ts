@@ -1,36 +1,30 @@
-
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { toWords } from 'number-to-words';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { toWords } from 'number-to-words';
+
 
 @Component({
-  selector: 'app-offerletter',
+  selector: 'app-incrementletter',
   imports: [FormsModule],
-  templateUrl: './offerletter.component.html',
-  styleUrls: ['./offerletter.component.css']
+  templateUrl: './incrementletter.component.html',
+  styleUrl: './incrementletter.component.css'
 })
-export class OfferletterComponent {
-
+export class IncrementletterComponent {
   showError = false;
   submitted = false;
 
   form = {
     firstName: '',
     lastName: '',
-    email: '',
-    phone: '',
-    position: '',
-    joiningDate: '',
-    ctc: '',
-    address: '',
-    company: '',
-
+    Previous_Salary: '',
+    New_Salary: '',
+    Effective_Date: '',
+    company: ''
   };
-  ctcInWords: string | undefined;
+  NsalaryInWords: string | undefined;
   formattedDate: string | undefined;
-
 
 
   submitForm() {
@@ -42,7 +36,7 @@ export class OfferletterComponent {
     }
 
     this.submitted = true;
-    this.ctcInWords = toWords(this.form.ctc);
+    this.NsalaryInWords = toWords(this.form.New_Salary);
     const today = new Date();
     this.formattedDate = today.toLocaleDateString('en-GB', {
       day: '2-digit',
@@ -50,9 +44,9 @@ export class OfferletterComponent {
       year: 'numeric'
     });
 
-    const tempDate = this.form.joiningDate;
+    const tempDate = this.form.Effective_Date;
     const formattedJoinDate = this.formatDateReadable(tempDate);
-    this.form.joiningDate = formattedJoinDate;
+    this.form.Effective_Date = formattedJoinDate;
 
   }
 
@@ -109,19 +103,6 @@ export class OfferletterComponent {
 
       pdf.save(`${this.form.firstName}_OfferLetter.pdf`);
 
-      this.form = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        position: '',
-        joiningDate: '',
-        ctc: '',
-        address: '',
-        company: '',
-
-      };
-
       // Send form data to Google Script endpoint
       const response = await fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec', {
         method: 'POST',
@@ -132,14 +113,11 @@ export class OfferletterComponent {
       const result = await response.json();
       console.log('Google Script response:', result);
 
-
-
     } catch (error) {
       console.error('Error generating or sending PDF:', error);
       // Optionally show user-friendly message
     }
   }
-
 
   openModal() {
     const modalElement = document.getElementById('bulkuplod');
@@ -148,6 +126,8 @@ export class OfferletterComponent {
   }
 
 }
+
+
 
 
 

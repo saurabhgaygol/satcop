@@ -1,0 +1,278 @@
+<div class="d-flex flex-column" style="height: 95vh; overflow: hidden;">
+    <div class="container-fluid bg-black d-flex align-items-center sadowbox2"
+        style="height: 40px; background-color: rgb(24, 23, 23); ">
+        <h5 class="text-white m-0 px-3">Increment letter</h5>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+        <div class="container-fluid">
+            <div class="row">
+                <form class="col-lg-3 p-3" #offerForm="ngForm" (ngSubmit)="submitForm()" novalidate>
+                    <input class="form-control my-3" type="text" [(ngModel)]="form.firstName" name="firstName"
+                        placeholder="First name" required />
+                    <input class="form-control my-3" type="text" [(ngModel)]="form.lastName" name="lastName"
+                        placeholder="Last name" required />
+
+                    <div class="input-group mb-3 no-relative ">
+                        <span class="input-group-text">INR</span>
+                        <input class="form-control" type="number" (input)="validateAmount($event)"
+                            [(ngModel)]="form.Previous_Salary" name="ctc" placeholder="Previous Salary" min="0"
+                            required />
+                    </div>
+
+                    <div class="input-group mb-3 no-relative ">
+                        <span class="input-group-text">INR</span>
+                        <input class="form-control" type="number" (input)="validateAmount($event)"
+                            [(ngModel)]="form.New_Salary" name="ctc" placeholder="New Salary" min="0" required />
+                    </div>
+
+                    <input class="form-control my-3" type="text" onfocus="(this.type='date')"
+                        [(ngModel)]="form.Effective_Date" name="joiningDate" placeholder="Effective Date" />
+
+
+                    @if (showError) {
+                    <div class="text-danger">Amount must be greater than 0</div>
+                    }
+
+
+
+
+                    <div class="d-flex justify-content-center align-items-center my-3">
+                        <input class="form-check-input" type="radio" id="satcop" [(ngModel)]="form.company"
+                            name="company" value="Satcop India Pvt.Ltd" required />
+                        <label class="form-check-label mx-1" for="satcop">Satcop India Pvt.Ltd</label>
+
+                        <input class="form-check-input ms-3" type="radio" id="bellbuny" [(ngModel)]="form.company"
+                            name="company" value="Bellbuny" required />
+                        <label class="form-check-label mx-1" for="bellbuny">Bellbuny</label>
+                    </div>
+
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-secondary">Create Appraisal Letter</button>
+                    </div>
+
+                </form>
+
+
+                @if (submitted) {
+
+                <div class="col-lg-6 " style="margin-left: 10%;">
+                    @if (form.company === 'Satcop India Pvt.Ltd') {
+                    <h4 class="" style="margin-left: 15%; font-size: 30px;"><b>Preview</b></h4>
+                    <div class="border   shadow bg-white text-black preview-scale " id="preview">
+                        <img src="Copy of Letter Head.pdf.png" alt="" class="p-2"
+                            style="width: 101%; height: 85px; position: relative;">
+                        <div style="padding-top: 80px; ">
+                            <div class="p-3" style="font-family: 'Times New Roman', Times, serif;">
+                                <p class="" style="font-size: 16px; margin-top: 70px; margin-left: 50px;">
+                                    <strong>Date:</strong>
+                                    {{formattedDate}}
+                                </p>
+
+                                <p class="text-center fw-bold"
+                                    style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-decoration: underline;">
+                                    APPRAISAL LETTER</p>
+
+
+                                <p style="font-size: 16px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                                    To,</p>
+                                <p style="font-size: 16px; margin-top: 0px; margin-left: 50px;"><b>Dear {{
+                                        form.firstName }} {{
+                                        form.lastName
+                                        }},</b></p>
+
+                                <p
+                                    style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                                    I wanted to take a moment to acknowledge your exceptional contributions to our team.
+                                    Your dedication, creativity, and collaborative spirit have significantly impacted
+                                    our team's success.
+
+                                </p>
+
+
+
+                                <p
+                                    style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                                    We are delighted to inform you that your annual salary has been increased.
+                                </p>
+
+                                <p
+                                    style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                                    Previous Salary – <b> {{form.Previous_Salary}}.</b>
+                                </p>
+
+
+                                <p
+                                    style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                                    New Salary –<b> {{form.New_Salary}}.</b>
+
+                                </p>
+
+
+                                <p
+                                    style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+
+                                    Effective Date – <b>{{form.Effective_Date}}</b>
+                                </p>
+
+
+                                <p
+                                    style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom:8px; margin-left: 50px;">
+                                    With warm regards,
+                                </p>
+                                <p style="font-size: 16px; word-spacing: 2px; margin-bottom: 16px; margin-left: 50px;">
+                                    For SatCop India Pvt Ltd.
+                                </p>
+
+                                <img src="abs.png" style="margin-left: 65px; width: 80px; margin-bottom: 16px;">
+
+                                <p style="font-size: 16px; word-spacing: 2px; margin-bottom: 16px; margin-left: 50px;">
+                                    Director
+                                </p>
+
+                                <p style="font-size: 16px; word-spacing: 2px; margin-bottom: 14px; margin-left: 50px;">
+                                    Birendra Jain
+                                </p>
+                            </div>
+                        </div>
+                        <img src="Copy of Letter Head.pdf (1).png" alt="" class="p-0"
+                            style="width: 101%; height: 85px; margin-top: 180px; margin-bottom: 0%;">
+
+                    </div>
+
+
+                    <div class="" style="margin-top: -690px;">
+                        <button class="btn btn-success" (click)="downloadPDF()">Download PDF</button>
+                    </div>
+
+                    }
+
+
+                    @if (form.company === 'Bellbuny') {
+                    <h4 class="" style="margin-left: 15%; font-size: 30px;"><b>Preview</b></h4>
+                    <div class="border   shadow bg-white text-black preview-scale " id="preview">
+                        <img src="Yellow and Black Modern Studio Letterhead.png" alt="" class="pt-4"
+                            style="width: 100%; max-width: 1000px; height: auto; position: relative;">
+                        <div style="padding-top: 80px; ">
+                            <div class="p-3" style="font-family: 'Times New Roman', Times, serif;">
+                                <p class="" style="font-size: 16px; margin-top: 70px; margin-left: 50px;">
+                                    <strong>Date:</strong>
+                                    {{formattedDate}}
+                                </p>
+
+                                <p class="text-center fw-bold"
+                                    style="font-family: 'Times New Roman', Times, serif; font-size: 18px; text-decoration: underline;">
+                                    APPRAISAL LETTER</p>
+
+
+                                <p style="font-size: 16px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                                    To,</p>
+                                <p style="font-size: 16px; margin-top: 0px; margin-left: 50px;"><b>Dear {{
+                                        form.firstName }} {{
+                                        form.lastName
+                                        }},</b></p>
+
+                                <p
+                                    style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                                    I wanted to take a moment to acknowledge your exceptional contributions to our team.
+                                    Your dedication, creativity, and collaborative spirit have significantly impacted
+                                    our team's success.
+
+                                </p>
+
+
+
+                                <p
+                                    style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                                    We are delighted to inform you that your annual salary has been increased.
+                                </p>
+
+                                <p
+                                    style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                                    Previous Salary –
+                                </p>
+
+
+                                <p
+                                    style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+                                    New Salary –
+
+                                </p>
+
+
+                                <p
+                                    style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom: 16px; margin-left: 50px;">
+
+                                    Effective Date –
+                                </p>
+
+                                <p
+                                    style="font-size: 16px; word-spacing: 2px; margin-top: 25px; margin-bottom:8px; margin-left: 50px;">
+                                    With warm regards,
+                                </p>
+                                <p style="font-size: 16px; word-spacing: 2px; margin-bottom: 16px; margin-left: 50px;">
+                                    For SatCop India Pvt Ltd.
+                                </p>
+
+                                <img src="abs.png" style="margin-left: 65px; width: 80px; margin-bottom: 16px;">
+
+                                <p style="font-size: 16px; word-spacing: 2px; margin-bottom: 16px; margin-left: 50px;">
+                                    Director
+                                </p>
+
+                                <p style="font-size: 16px; word-spacing: 2px; margin-bottom: 14px; margin-left: 50px;">
+                                    Birendra Jain
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            style="height: 10px; background-color:  rgb(247, 175, 34); width: 100%; margin-top: 150px; margin-bottom: 50px;">
+                        </div>
+
+                    </div>
+
+
+                    <div class="" style="margin-top: -700px;">
+                        <button class="btn btn-success" (click)="downloadPDF()">Download PDF</button>
+                    </div>
+
+
+
+                    }
+                </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid bg-black d-flex align-items-center sadowbox"
+        style="height: 40px; background-color: white; ">
+        <div class="row bg-black d-flex align-items-center">
+            <div class="text-center d-flex align-items-center" (click)="openModal()" style="cursor: pointer;">
+                <i class="fa-solid fa-arrow-up px-5 text-dark bi bi-star  " style="font-size: 10px;">
+                    <div class="bi bi-star text-dark " style="font-size: 8px;">XLS</div>
+                </i>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="bulkuplod" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"
+    data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="font-size: 16px;">Bulk Increment Letter</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                vfvfvfvvf
+            </div>
+        </div>
+    </div>
+</div>
