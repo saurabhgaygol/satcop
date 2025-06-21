@@ -19,14 +19,14 @@ export class LoginComponent {
   constructor(private http: HttpClient, private router: Router) { }
 
   login() {
-    const apiUrl = 'https://script.google.com/macros/s/AKfycbzxd1ENJSSFKbsKk3pNaLwOe3Unyz8myqX2GFwCcX954rNAiy_r7DF49LBFeig4SN1Byg/exec';
+    const apiUrl = 'https://script.google.com/macros/s/AKfycbzYI8TauE28bNIqbJqJ5hY_o62GbaTnZd3EGotyvmVrs4p_JUYt6yo5M3zmppDgNvJJPg/exec';
 
     this.http.get<any[]>(apiUrl).subscribe(users => {
       const user = users.find(u => u.userId === this.userId && u.password === this.password);
 
       if (user) {
         sessionStorage.setItem('userdata', JSON.stringify(user));
-        alert('Login Successful as ' + user.Name);
+        alert('Login Successful as ' + user.name);
 
         // Clear inputs
         this.userId = '';

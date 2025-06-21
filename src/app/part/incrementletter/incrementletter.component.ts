@@ -3,6 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { toWords } from 'number-to-words';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import * as XLSX from 'xlsx';
+import { ExclefileserviceService } from '../../services/exclefileservice.service';
+import { routes } from '../../app.routes';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -25,9 +29,10 @@ export class IncrementletterComponent {
   };
   NsalaryInWords: string | undefined;
   formattedDate: string | undefined;
+  companyName: any;
 
 
-  submitForm() {
+  async submitForm(): Promise<void> {
     const isFormValid = Object.values(this.form).every(value => value !== '');
 
     if (!isFormValid) {
@@ -36,7 +41,9 @@ export class IncrementletterComponent {
     }
 
     this.submitted = true;
+
     this.NsalaryInWords = toWords(this.form.New_Salary);
+
     const today = new Date();
     this.formattedDate = today.toLocaleDateString('en-GB', {
       day: '2-digit',
@@ -48,6 +55,8 @@ export class IncrementletterComponent {
     const formattedJoinDate = this.formatDateReadable(tempDate);
     this.form.Effective_Date = formattedJoinDate;
 
+
+    await new Promise(resolve => setTimeout(resolve, 100));
   }
 
   formatDateReadable(tempDate: string) {
@@ -64,7 +73,7 @@ export class IncrementletterComponent {
     this.showError = isNaN(value) || value <= 0;
   }
 
-  async downloadPDF() {
+  async downloadPDF(): Promise<void> {
     const element = document.getElementById('preview');
     if (!element) return;
 
@@ -110,6 +119,8 @@ export class IncrementletterComponent {
         headers: { 'Content-Type': 'application/json' },
       });
 
+      await new Promise(resolve => setTimeout(resolve, 500));
+
       const result = await response.json();
       console.log('Google Script response:', result);
 
@@ -125,7 +136,98 @@ export class IncrementletterComponent {
     modal.show();
   }
 
+  constructor(private excelServicefile: ExclefileserviceService) { }
+
+  downloadSample() {
+    this.excelServicefile.exportSampleExcel();
+  }
+
+  //bulk excle read code//
+
+  handleSubmit() {
+    this.BulkDownload();
+
+  }
+
+  parsedData: any[] = [];
+
+  onFileChange(event: any): void {
+    const target: DataTransfer = <DataTransfer>(event.target);
+    if (target.files.length !== 1) {
+      console.error('Please select a single file.');
+      return;
+    }
+
+    const reader: FileReader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const bstr: string = e.target.result;
+      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+
+      const wsname: string = wb.SheetNames[0];
+      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+      const allRows: any[][] = XLSX.utils.sheet_to_json(ws, { header: 1 });
+
+      if (allRows.length < 2) {
+        console.warn('Not enough rows in file.');
+        return;
+      }
+
+      const headers = allRows[1]; // Second row
+      const dataRows = allRows.slice(2); // From third row onwards
+
+      this.parsedData = dataRows.map(row => {
+        const rowObj: any = {};
+        headers.forEach((header: any, i: number) => {
+          rowObj[header] = row[i] ?? '';
+        });
+        return rowObj;
+      });
+
+      console.log('Final Data:', this.parsedData);
+    };
+
+    reader.readAsBinaryString(target.files[0]);
+  }
+
+  async BulkDownload() {
+    const excledata = this.parsedData;
+
+
+    for (const exc of excledata) {
+      this.form.firstName = exc["First Name"];
+      this.form.lastName = exc["Last Name"];
+      this.form.Previous_Salary = exc["Previous Salary"];
+      this.form.New_Salary = exc["New Salary"];
+      this.form.Effective_Date = exc["Effective Date"];
+
+
+      this.form.company = this.companyName;
+
+      await this.submitForm();
+      await new Promise(resolve => setTimeout(resolve, 100));
+      await this.downloadPDF();
+    }
+
+
+    this.form.firstName = '';
+    this.form.lastName = '';
+    this.form.Previous_Salary = '';
+    this.form.New_Salary = '';
+    this.form.Effective_Date = '';
+
+    location.reload();
+
+  }
+
+
+
+
 }
+
+
+
 
 
 

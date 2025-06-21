@@ -4,13 +4,48 @@
     position: static !important;
 }
 
+
 .preview-scale {
     transform: scale(0.4);
-    /* You can reduce it further if needed */
     transform-origin: top left;
-    width: 125%;
-    /* Compensate scaling so layout looks normal */
+    width: 124.5%;
+
+
 }
+
+/* Badi Screens ke Liye */
+@media (min-width: 1920px) {
+    .preview-scale {
+        transform: scale(0.6);
+        /* Badi screen par scale badhega */
+        width: 98%;
+
+
+    }
+}
+
+.btndounlod {
+    margin-top: -690px;
+    /* Default value */
+}
+
+
+
+
+@media (min-width: 1320px) {
+
+    .btndounlod {
+        margin-top: -100px;
+
+    }
+
+
+
+}
+
+
+
+
 
 .sadowbox {
     box-shadow: 0 -4px 6px -4px rgba(0, 0, 0, 0.5);

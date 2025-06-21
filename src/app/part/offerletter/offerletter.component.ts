@@ -70,6 +70,7 @@ export class OfferletterComponent {
     this.showError = isNaN(value) || value <= 0;
   }
 
+
   async downloadPDF() {
     const element = document.getElementById('preview');
     if (!element) return;
@@ -82,7 +83,7 @@ export class OfferletterComponent {
 
     try {
       const canvas = await html2canvas(element, {
-        scale: 25,
+        scale: 15,
         useCORS: true,
       });
 
