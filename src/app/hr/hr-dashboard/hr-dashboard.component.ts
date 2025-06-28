@@ -19,11 +19,16 @@ export class HrDashboardComponent implements OnInit {
   showNotification = false;
   userName: any;
   profileimage!: SafeUrl;
-
+  showsupport = false;
+  emailLink: any;
 
 
   //constracter
-  constructor(private router: Router, private sanitizer: DomSanitizer) { }
+  constructor(private router: Router, private sanitizer: DomSanitizer) {
+
+    this.emailLink = this.sanitizer.bypassSecurityTrustUrl('mailto:saurabh@gmail.com');
+
+  }
 
   //method to show user longin
   ngOnInit(): void {
@@ -49,6 +54,7 @@ export class HrDashboardComponent implements OnInit {
   //notification logic show
   toggleNotification() {
     this.showNotification = !this.showNotification;
+    this.showsupport = false;
 
   }
 
@@ -71,6 +77,22 @@ export class HrDashboardComponent implements OnInit {
     const modal = new (window as any).bootstrap.Modal(modalElement);
     modal.show();
   }
+
+  toggleNotification2() {
+    this.showsupport = !this.showsupport;
+    this.showNotification = false;
+  }
+
+  //notification logic close
+  closeNotification2() {
+    this.showsupport = false;
+    this.showNotification = false;
+  }
+
+
+
+
+
 
 }
 

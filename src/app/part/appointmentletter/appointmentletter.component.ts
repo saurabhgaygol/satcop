@@ -3,6 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { toWords } from 'number-to-words';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import * as XLSX from 'xlsx';
+import { ExclefileserviceService } from '../../services/exclefileservice.service';
+
 
 @Component({
   selector: 'app-appointmentletter',
@@ -28,6 +31,7 @@ export class AppointmentletterComponent {
   };
   ctcInWords: string | undefined;
   formattedDate: string | undefined;
+  companyName: any;
 
 
   submitForm() {
@@ -121,6 +125,119 @@ export class AppointmentletterComponent {
       // Optionally show user-friendly message
     }
   }
+
+
+
+  openModal() {
+    const modalElement = document.getElementById('bulkuplod');
+    const modal = new (window as any).bootstrap.Modal(modalElement);
+    modal.show();
+  }
+
+
+  constructor(private excelServicefile: ExclefileserviceService) { }
+
+  downloadSample() {
+    this.excelServicefile.exportSampleExcel2();
+  }
+
+  //bulk excle read code//
+
+  handleSubmit() {
+    this.BulkDownload();
+
+  }
+
+  parsedData: any[] = [];
+
+  onFileChange(event: any): void {
+    const target: DataTransfer = <DataTransfer>(event.target);
+    if (target.files.length !== 1) {
+      console.error('Please select a single file.');
+      return;
+    }
+
+    const reader: FileReader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const bstr: string = e.target.result;
+      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+
+      const wsname: string = wb.SheetNames[0];
+      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+      const allRows: any[][] = XLSX.utils.sheet_to_json(ws, { header: 1 });
+
+      if (allRows.length < 2) {
+        console.warn('Not enough rows in file.');
+        return;
+      }
+
+      const headers = allRows[1]; // Second row
+      const dataRows = allRows.slice(2); // From third row onwards
+
+      this.parsedData = dataRows.map(row => {
+        const rowObj: any = {};
+        headers.forEach((header: any, i: number) => {
+          rowObj[header] = row[i] ?? '';
+        });
+        return rowObj;
+      });
+
+      console.log('Final Data:', this.parsedData);
+    };
+
+    reader.readAsBinaryString(target.files[0]);
+  }
+
+  async BulkDownload() {
+    const excledata = this.parsedData;
+
+
+    for (const exc of excledata) {
+      this.form.firstName = exc["First Name"];
+      this.form.lastName = exc["Last Name"];
+      this.form.email = exc["Previous Salary"];
+      this.form.phone = exc["New Salary"];
+      this.form.position = exc["Effective Date"];
+      this.form.joiningDate = exc["Effective Date"];
+      this.form.ctc = exc["Effective Date"];
+      this.form.address = exc["Effective Date"];
+
+      this.form.company = this.companyName;
+
+      await this.submitForm();
+      await new Promise(resolve => setTimeout(resolve, 100));
+      await this.downloadPDF();
+    }
+
+
+    this.form = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      position: '',
+      joiningDate: '',
+      ctc: '',
+      address: '',
+      company: '',
+
+    };
+
+    location.reload();
+
+  }
+
+
+
+
+
+
+
+
+
+
 
 
 
