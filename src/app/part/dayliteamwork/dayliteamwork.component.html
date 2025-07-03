@@ -1,0 +1,105 @@
+<div class="d-flex flex-column" style="height: 97vh; overflow: hidden;">
+    <div class="container-fluid bg-black d-flex align-items-center sadowbox2"
+        style="height: 40px; background-color: rgb(24, 23, 23); ">
+        <h5 class="text-white m-0 px-3">Daily activity </h5>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+        <div class="container-fluid">
+            <div class="row">
+                <form class="col-lg-3 p-3" (ngSubmit)="submitForm()" novalidate>
+                    <input class="form-control my-3" type="text" [(ngModel)]="form.schoolname" name="schoolname"
+                        placeholder="School name" required />
+                    <input class="form-control my-3" type="text" [(ngModel)]="form.branchname" name="branchname"
+                        placeholder="Branch name" required />
+                    <textarea class="form-control my-3 h-50" type="text" [(ngModel)]="form.work" name="work"
+                        placeholder="Please enter your work" required></textarea>
+
+                    <div class="d-flex justify-content-center align-items-center my-3">
+
+                        <input class="form-check-input" type="radio" [(ngModel)]="worktype" name="worktype" value="Self"
+                            (change)="onWorkTypeChange()" required />
+                        <label class="form-check-label mx-1">Self Work</label>
+
+
+                        <input class="form-check-input ms-3" type="radio" [(ngModel)]="worktype" name="worktype"
+                            value="ticket" (change)="onWorkTypeChange()" required />
+                        <label class="form-check-label mx-1">Ticket Id</label>
+                    </div>
+
+                    @if(worktype === 'ticket'){
+                    <div class="d-flex justify-content-center">
+                        <input type="text" class="form-control w-50" placeholder="Enter Ticket ID" name="ticketId"
+                            [(ngModel)]="ticketId" (ngModelChange)="updateCompanyFromTicket()" />
+                    </div>
+                    }
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success">Start Work</button>
+                    </div>
+                </form>
+
+                <div class="col-lg-6" style="margin-left: 3%; margin-top: 10px; width: 70%;">
+                    <div style="border: 1px solid black; height: 83vh; display: flex; flex-direction: column;">
+
+                        <!-- Fixed Section: Heading + Table Head -->
+                        <div style=" top: 0; background-color: #c4c0c0;">
+                            <h5 style="padding: 10px; margin: 0; border-bottom: 1px solid black; "><b>Your Pending
+                                    Task</b>
+                            </h5>
+                            <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+                                <thead style="text-align: center;">
+                                    <tr style="border: 1px solid black;">
+                                        <th style="border: 1px solid black;">ID</th>
+                                        <th style="border: 1px solid black;">School Name</th>
+                                        <th style="border: 1px solid black;">Branch Name</th>
+                                        <th style="border: 1px solid black;">Work Description</th>
+                                        <th style="border: 1px solid black;">Status</th>
+                                        <th style="border: 1px solid black;">Action</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+
+                        <div style="overflow-y: auto; flex-grow: 1;">
+                            <table class="table table-hover"
+                                style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+                                <tbody>
+                                    <tr *ngFor="let work of worksfach; let i = index" style="text-align: center;">
+                                        <td style="padding: 5px; align-content: center;">{{ i + 1 }}</td>
+                                        <td style="padding: 5px; align-content: center;">{{ work.school_name }}</td>
+                                        <td style="padding: 5px;align-content: center;">{{ work.branch_name }}</td>
+                                        <td
+                                            style="padding: 5px; max-width: 200px; word-wrap: break-word; white-space: normal; overflow-wrap: break-word;align-content: center;">
+                                            {{ work.work_description }}
+                                        </td>
+                                        <td style="padding: 5px;align-content: center;">{{ work.status }}</td>
+                                        <td style="padding: 5px; align-content: center;">
+                                            <button class="btn btn-success" (click)="updateWork2(work.id)">Done</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid bg-black d-flex align-items-center sadowbox"
+        style="height: 40px; background-color: white; ">
+        <div class="row bg-black d-flex align-items-center">
+            <div class="text-center d-flex align-items-center" style="cursor: pointer;">
+
+            </div>
+        </div>
+    </div>
+
+</div>

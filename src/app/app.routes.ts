@@ -11,6 +11,7 @@ import { OfferletterComponent } from './part/offerletter/offerletter.component';
 import { AppointmentletterComponent } from './part/appointmentletter/appointmentletter.component';
 import { ChangepasswordComponent } from './part/changepassword/changepassword.component';
 import { IncrementletterComponent } from './part/incrementletter/incrementletter.component';
+import { DayliteamworkComponent } from './part/dayliteamwork/dayliteamwork.component';
 
 export const routes: Routes = [
   {
@@ -53,7 +54,12 @@ export const routes: Routes = [
     path: 'team-dashboard',
     canActivate: [authGuard],
     component: TeamDashboardComponent,
-    data: { role: 'Team' }
+    data: { role: 'Team' },
+    children: [
+      { path: 'profile', component: ProfileComponent },
+      { path: 'notification', component: NotificationComponent },
+      { path: 'dayliteamwork', component: DayliteamworkComponent }
+    ]
   },
 
 
