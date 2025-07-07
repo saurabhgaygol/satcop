@@ -44,7 +44,7 @@ export class DayliteamworkComponent {
     if (this.worktype === 'Self') {
       this.form.company = 'Self';
     } else if (this.worktype === 'ticket') {
-      this.form.company = this.ticketId || ''; // ticketId may be empty initially
+      this.form.company = this.ticketId || '';
     }
   }
 
@@ -57,6 +57,11 @@ export class DayliteamworkComponent {
 
   submitForm() {
     this.form.stutas = 'Pending';
+
+    if (!this.form.company || this.form.company.trim() === '') {
+      alert('Please enter Ticket Id');
+      return;
+    }
 
     const payload = {
       action: 'create',
@@ -96,7 +101,8 @@ export class DayliteamworkComponent {
       company: '',
       stutas: ''
     };
-
+    this.worktype = '';
+    this.ticketId = '';
   }
 
   worksfach: any[] = [];
@@ -150,6 +156,8 @@ export class DayliteamworkComponent {
       }
     );
   }
+
+
 
 
 }

@@ -14,7 +14,7 @@
           <i class="fa-solid fa-user my-3 custom-border ms-2" id="dropdownMenuButton1"
             style="width: 2.5rem; color: white; font-size: large;" data-bs-toggle="dropdown" aria-expanded="false"></i>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" (click)="openModal()">Change Password</a></li>
+            <li><a class="dropdown-item" (click)="openModal()" style="font-size: 14px;">Change Password</a></li>
             <li><a class="dropdown-item" (click)="signOut()"><b>Logout</b> <br>
                 <p class="" style="font-size: 12px;"> {{userName}}</p>
               </a></li>
@@ -37,7 +37,9 @@
             </div>
           </div>
 
-
+          <button type="button" class="btn text-white my-2 custom-border" routerLink="dayliteamwork"
+            style="width: 6.5rem;"><i class="fa-solid fa-list-check fa-lg mb-2" style="color: white; "></i><br>Daily
+            Task</button>
           <button type="button" class="btn text-white my-2 custom-border" routerLink="offerletter"
             style="width: 6.5rem;"><i class="fa-solid fa-file-invoice fa-lg mb-2"
               style="color: white; "></i>Offer_letter</button>
@@ -48,9 +50,30 @@
             style="width: 6.5rem;"><i class="fa-solid fa-file-invoice fa-lg mb-2"
               style="color: white; "></i>Inc_letter</button>
 
+
+          <div class="sidebar-container" (mouseenter)="isSidebarOpen = true" (mouseleave)="isSidebarOpen = false">
+            <div class="sidebar">
+              <button type="button" class="btn text-white my-2 custom-border">
+                <i class="fa-solid fa-laptop-file fa-lg mb-2"></i>
+                Report
+              </button>
+
+
+              @if(isSidebarOpen){
+              <div class="sidercontain">
+                <button type="button" class="btn text-white textcoluersidebar" routerLink="task_report">
+                  <i class="fa-solid fa-file-signature fa-lg "></i>
+                  Task Report
+                </button>
+              </div>
+              }
+            </div>
+          </div>
+
+
         </div>
 
-        <div class="bottom-item" style="margin-top: 32vh;">
+        <div class="bottom-item" style="margin-top: 28vh;">
           <button type="button" class="btn text-white my-2 custom-border" (click)="toggleNotification2()"
             style="width: 6.5rem;"><i class="fa-solid fa-headset fa-lg mb-1"
               style="color: white; "></i><br>Support</button>

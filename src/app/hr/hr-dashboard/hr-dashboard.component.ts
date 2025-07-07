@@ -15,6 +15,8 @@ import { ChangepasswordComponent } from "../../part/changepassword/changepasswor
 })
 export class HrDashboardComponent implements OnInit {
 
+  isSidebarOpen = false;
+
   //veriable
   showNotification = false;
   userName: any;

@@ -12,6 +12,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   styleUrl: './team-dashboard.component.css'
 })
 export class TeamDashboardComponent {
+  isSidebarOpen = false;
 
 
   //veriable

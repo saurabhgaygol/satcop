@@ -12,6 +12,7 @@ import { AppointmentletterComponent } from './part/appointmentletter/appointment
 import { ChangepasswordComponent } from './part/changepassword/changepassword.component';
 import { IncrementletterComponent } from './part/incrementletter/incrementletter.component';
 import { DayliteamworkComponent } from './part/dayliteamwork/dayliteamwork.component';
+import { TaskReportComponent } from './all_report/task-report/task-report.component';
 
 export const routes: Routes = [
   {
@@ -38,7 +39,9 @@ export const routes: Routes = [
       { path: 'offerletter', component: OfferletterComponent },
       { path: 'appointmentletter', component: AppointmentletterComponent },
       { path: 'changepassword', component: ChangepasswordComponent },
-      { path: 'incrementletter', component: IncrementletterComponent }
+      { path: 'incrementletter', component: IncrementletterComponent },
+      { path: 'dayliteamwork', component: DayliteamworkComponent },
+      { path: 'task_report', component: TaskReportComponent }
 
     ]
 
@@ -58,7 +61,8 @@ export const routes: Routes = [
     children: [
       { path: 'profile', component: ProfileComponent },
       { path: 'notification', component: NotificationComponent },
-      { path: 'dayliteamwork', component: DayliteamworkComponent }
+      { path: 'dayliteamwork', component: DayliteamworkComponent },
+      { path: 'task_report', component: TaskReportComponent }
     ]
   },
 

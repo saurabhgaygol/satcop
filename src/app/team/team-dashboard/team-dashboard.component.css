@@ -53,10 +53,60 @@
 }
 
 
-
-
-
-
 .tranpert {
     background-color: rgba(0, 0, 0, 0.85);
+}
+
+
+.sidebar-container {
+    position: relative;
+    width: fit-content;
+}
+
+.sidebar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.sidercontain {
+    height: fit-content;
+
+    overflow-y: auto;
+    transition: all 0.3s ease-in-out;
+    position: absolute;
+    /* ensures it overlays */
+    top: 50px;
+    /* adjust based on your layout */
+    left: 100%;
+    /* to appear to the right of sidebar */
+    background-color: #1f1f1f;
+    /* or your sidebar background */
+    padding: 10px;
+    z-index: 1000;
+
+}
+
+.textcoluersidebar {
+    width: 220px;
+    border-radius: 0%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.textcoluersidebar:hover {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+
+}
+
+
+.textcoluersidebar:active {
+    border: 2px solid rgba(255, 255, 255, 0.5);
 }
