@@ -862,78 +862,83 @@
         <div class="container-fluid" style="padding-left: 0%;">
             <div class="row">
                 <div class="col-lg-12" style="padding-right: 0%;">
-                    <div style="border: 1px solid black; height: 86vh; display: flex; flex-direction: column;">
+                    <div
+                        style="border-top: 1px solid black; border-bottom: 1px solid black; height: 86vh; overflow-y: auto;">
+                        <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
 
 
-                        <div style=" top: 0; background-color: #c4c0c0;">
-                            <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
-                                <thead style="text-align: center;">
-                                    <tr style="border: 1px solid black;">
-                                        <th style="border: 1px solid black; width: 30px;">ID</th>
-                                        <th style="border: 1px solid black;">School Name</th>
-                                        <th style="border: 1px solid black;">Branch Name</th>
-                                        <th style="border: 1px solid black;width: 90px;">Work Type</th>
-                                        <th style="border: 1px solid black; width:350px;">Work Description</th>
-                                        <th style="border: 1px solid black;">Work Start</th>
-                                        <th style="border: 1px solid black;">Work Completed</th>
-                                        <th style="border: 1px solid black;">Work Handal</th>
-                                        <th style="border: 1px solid black; width: 100px; ">Status</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
+                            <thead style=" top: 0; background-color: #c4c0c0; z-index: 10; text-align: center;">
+                                <tr>
+                                    <th
+                                        style="width: 30px; border-left: 1px solid black; border-right: 1px solid black;">
+                                        ID</th>
+                                    <th
+                                        style="width: 167px; border-left: 1px solid black; border-right: 1px solid black;">
+                                        School Name</th>
+                                    <th
+                                        style="width: 168px; border-left: 1px solid black; border-right: 1px solid black;">
+                                        Branch Name</th>
+                                    <th
+                                        style="width: 90px; border-left: 1px solid black; border-right: 1px solid black;">
+                                        Work Type</th>
+                                    <th
+                                        style="width: 350px; border-left: 1px solid black; border-right: 1px solid black;">
+                                        Work Description</th>
+                                    <th style="border-left: 1px solid black; border-right: 1px solid black;">Work Start
+                                    </th>
+                                    <th style="border-left: 1px solid black; border-right: 1px solid black;">Work
+                                        Completed</th>
+                                    <th style="border-left: 1px solid black; border-right: 1px solid black;">Work Handal
+                                    </th>
+                                    <th
+                                        style="width: 100px; border-left: 1px solid black; border-right: 1px solid black;">
+                                        Status</th>
+                                </tr>
+                            </thead>
 
 
-                        <div style="overflow-y: auto; flex-grow: 1;">
-                            <table class="table table-hover"
-                                style="width: 100%; border-collapse: collapse; table-layout: fixed;">
-                                <tbody>
-                                    <tr *ngFor="let work of fachdata; let i = index" style="text-align: center;">
-                                        <td
-                                            style="align-content: center; font-size: 14px; width: 30px; border-right: 1px solid black;">
-                                            {{ i + 1 }}</td>
-                                        <td
-                                            style="align-content: center;width: 167px; font-size: 14px; border-right: 1px solid black; ">
-                                            {{ work.school_name }}</td>
-                                        <td
-                                            style="align-content: center; width: 168px; font-size: 14px; border-right: 1px solid black; ">
-                                            {{ work.branch_name }}</td>
-                                        <td
-                                            style="align-content: center;width: 90px; font-size: 12px; border-right: 1px solid black; ">
-                                            {{
-                                            work.work_type
-                                            }}</td>
-                                        <td
-                                            style="border-right: 1px solid black; word-wrap: break-word; white-space: normal; overflow-wrap:  break-word;align-content: center; width:350px; font-size: 14px;">
-                                            {{ work.work_description }}
-                                        </td>
-                                        <td
-                                            style="align-content: center; font-size: 14px; border-right: 1px solid black; ">
-                                            {{
-                                            work.handled_datetime}}
-                                        </td>
-                                        <td
-                                            style="align-content: center; font-size: 14px; border-right: 1px solid black;">
-                                            {{ work.completed_datetime}}
-                                        </td>
-                                        <td
-                                            style="align-content: center; font-size: 14px;border-right: 1px solid black;">
-                                            {{ work.work_handled_by}}
-                                        </td>
+                            <tbody style="text-align: center;">
+                                <tr *ngFor="let work of fachdata; let i = index"
+                                    style="transition: background-color 0.2s ease;"
+                                    onmouseover="this.style.backgroundColor='#c4c0c0';"
+                                    onmouseout="this.style.backgroundColor='';">
 
-                                        <td
-                                            style="align-content: center; width: 85px; font-size: 14px;border-right: 1px solid black;">
-                                            {{
-                                            work.status }}
-                                        </td>
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
+                                    <td
+                                        style="font-size: 14px; border-left: 1px solid black; border-right: 1px solid black;">
+                                        {{ i + 1 }}</td>
+                                    <td
+                                        style="font-size: 14px; word-break: break-word; border-left: 1px solid black; border-right: 1px solid black;">
+                                        {{ work.school_name }}</td>
+                                    <td
+                                        style="font-size: 14px; word-break: break-word; border-left: 1px solid black; border-right: 1px solid black;">
+                                        {{ work.branch_name }}</td>
+                                    <td
+                                        style="font-size: 12px; word-break: break-word; border-left: 1px solid black; border-right: 1px solid black;">
+                                        {{ work.work_type }}</td>
+                                    <td
+                                        style="font-size: 14px; word-break: break-word; white-space: normal; border-left: 1px solid black; border-right: 1px solid black;">
+                                        {{ work.work_description }}</td>
+                                    <td
+                                        style="font-size: 14px; border-left: 1px solid black; border-right: 1px solid black;">
+                                        {{ work.handled_datetime }}</td>
+                                    <td
+                                        style="font-size: 14px; border-left: 1px solid black; border-right: 1px solid black;">
+                                        {{ work.completed_datetime }}</td>
+                                    <td
+                                        style="font-size: 14px; border-left: 1px solid black; border-right: 1px solid black;">
+                                        {{ work.work_handled_by }}</td>
+                                    <td
+                                        style="font-size: 14px; border-left: 1px solid black; border-right: 1px solid black;">
+                                        {{ work.status }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+
+
+
+
 
             </div>
         </div>
