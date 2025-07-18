@@ -17,6 +17,8 @@ export class HrDashboardComponent implements OnInit {
 
   isSidebarOpen = false;
 
+  isSidebarOpen1 = false;
+
   //veriable
   showNotification = false;
   userName: any;

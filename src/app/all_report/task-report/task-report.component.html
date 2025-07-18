@@ -863,7 +863,74 @@
         <div class="container-fluid" style="padding-left: 0%;">
             <div class="row">
                 <div class="col-lg-12" style="padding-right: 0%;">
-                    <div
+
+
+                    <div style="border: 1px solid black; height: 86vh; display: flex; flex-direction: column;">
+
+                        <!-- Fixed Header Section -->
+                        <div style="background-color: #c4c0c0;">
+                            <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+                                <thead>
+                                    <tr style="border: 1px solid black; text-align: center;">
+                                        <th style="border: 1px solid black;">School Name</th>
+                                        <th style="border: 1px solid black;">Branch Name</th>
+                                        <th style="border: 1px solid black;">Work Type</th>
+                                        <th style="border: 1px solid black;">Work Description</th>
+                                        <th style="border: 1px solid black;">Work Start</th>
+                                        <th style="border: 1px solid black;">Work Completed</th>
+                                        <th style="border: 1px solid black;">Work Handal</th>
+                                        <th style="border: 1px solid black;">Status</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                        <!-- Scrollable Body -->
+                        <div style="overflow-y: auto; flex-grow: 1;">
+                            <style>
+                                /* Hide scrollbar for WebKit */
+                                div::-webkit-scrollbar {
+                                    display: none;
+                                }
+
+                                /* Make sure cells wrap correctly */
+                                td {
+                                    word-wrap: break-word;
+                                    white-space: normal;
+                                    overflow-wrap: break-word;
+                                }
+                            </style>
+
+                            <table style="width: 100%; border-collapse: collapse; table-layout: fixed;"
+                                class="table table-hover">
+                                <tbody>
+                                    <tr *ngFor="let work of fachdata; let i = index" style="text-align: center;">
+                                        <td style="padding: 5px;">{{ work.school_name }}</td>
+                                        <td style="padding: 5px;">{{ work.branch_name }}</td>
+                                        <td style="padding: 5px;">{{ work.work_type }}</td>
+                                        <td style="padding: 5px; max-width: 200px;">{{ work.work_description }}</td>
+                                        <td style="padding: 5px; font-size: 12px;">{{ work.handled_datetime }}</td>
+                                        <td style="padding: 5px; font-size: 12px;">{{ work.completed_datetime }}</td>
+                                        <td style="padding: 5px; font-size: 14px;">{{ work.work_handled_by }}</td>
+                                        <td style="padding: 5px;">{{ work.status }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!--  <div
                         style="border-top: 1px solid black; border-bottom: 1px solid black; height: 86vh; overflow-y: auto; ">
                         <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
 
@@ -934,7 +1001,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div>-->
                 </div>
 
 

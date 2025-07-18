@@ -15,9 +15,21 @@ export class TaskReportComponent {
   loading: boolean = true;
 
   constructor(private taskdata: DayliteamworkservicesService) { }
+  role: string | undefined;
+  username: string | undefined;
   fachdata: any[] = [];
 
   ngOnInit() {
+
+    const userid = sessionStorage.getItem('userdata');
+    if (userid) {
+      const tempuser = JSON.parse(userid);
+      this.role = tempuser.role;
+      this.username = tempuser.userId;
+
+    }
+
+
     this.taskdata.getAllWorks().subscribe((res) => {
       this.fachdata = res.map((item: any) => {
 
@@ -32,28 +44,45 @@ export class TaskReportComponent {
           handled_datetime: formatDate(item.handled_datetime),
           completed_datetime: formatDate(item.completed_datetime)
         };
+
       });
       this.loading = false;
+      this.someMethod();
 
     });
+
+
+
   }
 
   donedata() {
-    const tempdata = this.fachdata.filter((item => item.status === 'Done'));
+    const tempdata = this.fachdata.filter(item => item.work_handled_by === this.username);
     this.fachdata = tempdata;
-
   }
 
+  someMethod() {
+    switch (this.role) {
+      case 'Team':
+        this.donedata();
+        break;
 
+      case 'HR':
+        this.donedata();
+        break;
 
+      case 'Manager':
+        break;
+
+      default:
+
+        break;
+    }
+  }
 
 
 
   exportToExcel(): void {
-    // Step 1: Filter unwanted keys
     const filteredData = this.fachdata.map(({ id, work_sent_by, sent_datetime, ...rest }) => rest);
-
-    // Step 2: Use ExcelJS to export
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Work Report');
 

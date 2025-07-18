@@ -1,0 +1,96 @@
+.no-relative,
+.no-relative .form-control,
+.no-relative .input-group-text {
+    position: static !important;
+}
+
+.preview-scale {
+    transform: scale(0.4);
+    transform-origin: top left;
+    width: 124.5%;
+}
+
+/* Badi Screens ke Liye */
+@media (min-width: 1920px) {
+    .preview-scale {
+        transform: scale(0.6);
+        /* Badi screen par scale badhega */
+        width: 98%;
+    }
+
+    .preview-scale2 {
+
+        transform: scale(0.6);
+        /* Badi screen par scale badhega */
+        width: 80%;
+    }
+}
+
+@media (min-width: 2000px) {
+    .preview-scale {
+        transform: scale(0.8);
+        /* Badi screen par scale badhega */
+        width: 77%;
+    }
+
+    .preview-scale2 {
+
+        transform: scale(0.8);
+        /* Badi screen par scale badhega */
+        width: 65%;
+
+    }
+}
+
+
+
+@media (min-width: 1000px) {
+
+    .btndounlod {
+        margin-top: -690px;
+
+    }
+
+    .dtndownlod2 {
+        margin-top: -700px;
+    }
+}
+
+@media (min-width: 1920px) {
+
+    .btndounlod {
+        margin-top: -100px;
+
+    }
+
+    .dtndownlod2 {
+        margin-top: -90px;
+    }
+
+}
+
+@media (min-width: 2000px) {
+
+    .btndounlod {
+        margin-top: -100px;
+
+    }
+
+    .dtndownlod2 {
+        margin-top: -100px;
+    }
+}
+
+
+
+.sadowbox {
+    box-shadow: 0 -4px 6px -4px rgba(0, 0, 0, 0.5);
+}
+
+.sadowbox2 {
+    box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+}
+
+.tranpert {
+    background-color: rgba(0, 0, 0, 0.85);
+}

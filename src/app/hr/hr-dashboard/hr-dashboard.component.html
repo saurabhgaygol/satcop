@@ -37,15 +37,47 @@
             </div>
           </div>
 
-          <button type="button" class="btn text-white my-2 custom-border" routerLink="fctc" style="width: 6.5rem;"><i
-              class="fa-solid fa-gauge-high fa-lg mb-2" style="color: white; "></i><br>Dashboard</button>
+          <button type="button" class="btn text-white my-2 custom-border" routerLink="dashboard"
+            style="width: 6.5rem;"><i class="fa-solid fa-gauge-high fa-lg mb-2"
+              style="color: white; "></i><br>Dashboard</button>
 
           <button type="button" class="btn text-white my-2 custom-border" routerLink="dayliteamwork"
             style="width: 6.5rem;"><i class="fa-solid fa-list-check fa-lg mb-2" style="color: white; "></i><br>Daily
             Task</button>
 
+          <div class="sidebar-container" (mouseenter)="isSidebarOpen1 = true" (mouseleave)="isSidebarOpen1 = false"
+            style="width: 6.3rem;">
+            <div class="sidebar">
+              <button type="button" class="btn text-white my-2 custom-border">
+                <i class="fa-solid fa-file-invoice fa-lg mb-2"></i>
+                Documents
+              </button>
 
-          <button type="button" class="btn text-white my-2 custom-border" routerLink="offerletter"
+              @if(isSidebarOpen1){
+              <div class="sidercontain">
+                <button type="button" class="btn text-white textcoluersidebar" routerLink="offerletter">
+                  <i class="fa-solid fa-file-signature fa-lg "></i>
+                  Offer_letter
+                </button>
+
+                <button type="button" class="btn text-white textcoluersidebar" routerLink="appointmentletter">
+                  <i class="fa-solid fa-file-signature fa-lg "></i>
+                  App_letter
+                </button>
+
+                <button type="button" class="btn text-white textcoluersidebar" routerLink="incrementletter">
+                  <i class="fa-solid fa-file-signature fa-lg "></i>
+                  Inc_letter
+                </button>
+
+              </div>
+              }
+
+            </div>
+          </div>
+
+
+          <!-- <button type="button" class="btn text-white my-2 custom-border" routerLink="offerletter"
             style="width: 6.5rem;"><i class="fa-solid fa-file-invoice fa-lg mb-2"
               style="color: white; "></i>Offer_letter</button>
           <button type="button" class="btn text-white my-2 custom-border" routerLink="appointmentletter"
@@ -53,7 +85,7 @@
               style="color: white; "></i>App_letter</button>
           <button type="button" class="btn text-white my-2 custom-border" routerLink="incrementletter"
             style="width: 6.5rem;"><i class="fa-solid fa-file-invoice fa-lg mb-2"
-              style="color: white; "></i>Inc_letter</button>
+              style="color: white; "></i>Inc_letter</button>-->
 
 
           <div class="sidebar-container" (mouseenter)="isSidebarOpen = true" (mouseleave)="isSidebarOpen = false"
