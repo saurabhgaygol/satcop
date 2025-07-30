@@ -4,20 +4,23 @@ import { CommonModule } from '@angular/common';
 import { format } from 'date-fns';
 import * as ExcelJS from 'exceljs';
 import * as FileSaver from 'file-saver';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-task-report',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './task-report.component.html',
   styleUrl: './task-report.component.css'
 })
 export class TaskReportComponent {
   loading: boolean = true;
+  sarch: any;
 
   constructor(private taskdata: DayliteamworkservicesService) { }
   role: string | undefined;
   username: string | undefined;
   fachdata: any[] = [];
+  originalData: any[] = [];
 
   ngOnInit() {
 
@@ -48,6 +51,7 @@ export class TaskReportComponent {
       });
       this.loading = false;
       this.someMethod();
+      this.originalData = this.fachdata;
 
     });
 
@@ -119,6 +123,44 @@ export class TaskReportComponent {
       });
       FileSaver.saveAs(blob, 'filtered_work_data.xlsx');
     });
+  }
+
+
+  fiterdata() {
+
+    this.fachdata = this.originalData;
+
+    if (this.sarch) {
+
+      const searchValue = this.sarch.toLowerCase().trim();
+
+      const results = this.fachdata.filter(item =>
+        Object.values(item).some(val =>
+          val?.toString().toLowerCase().includes(searchValue)
+        )
+      );
+
+      if (results.length === 0) {
+        alert("no record found");
+        this.originalData;
+      }
+      else {
+        this.fachdata = results;
+
+      }
+
+
+
+      this.sarch = '';
+
+
+    }
+
+
+
+
+
+
   }
 
 

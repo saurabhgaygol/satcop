@@ -11,6 +11,8 @@ export class DashboardComponent {
   role: any;
   username: any;
   lengthdata: any;
+  totallengthdata: any;
+  donelengthdata: any;
 
   dataresive: any[] = [];
 
@@ -23,14 +25,13 @@ export class DashboardComponent {
       const tempuser = JSON.parse(userid);
       this.role = tempuser.role;
       this.username = tempuser.userId;
-      console.log(this.username);
 
     }
 
     this.report.getAllWorks().subscribe((res) => {
       const alldata = res;
-      this.dataresive = alldata.filter(item => item.status === 'Pending');
-      console.log(this.dataresive);
+      this.dataresive = alldata.filter(item => item.work_handled_by === this.username);
+      this.totallengthdata = this.dataresive.length;
       this.fiterdata();
       this.contionsionrole();
 
@@ -41,7 +42,11 @@ export class DashboardComponent {
 
   fiterdata() {
 
-    const tempdata = this.dataresive.filter(item => item.work_handled_by === this.username);
+    const tempdata1 = this.dataresive.filter(item => item.status === 'Done');
+    this.donelengthdata = tempdata1.length;
+
+
+    const tempdata = this.dataresive.filter(item => item.status === 'Pending');
     this.lengthdata = tempdata.length;
 
   }
@@ -50,18 +55,14 @@ export class DashboardComponent {
     switch (this.role) {
       case 'HR':
         this.fiterdata();
-        console.log(this.lengthdata);
         break;
 
       case 'Team':
         this.fiterdata();
-        console.log(this.lengthdata);
         break;
 
       case 'Manager':
-
         this.lengthdata = this.dataresive.length;
-        console.log(this.lengthdata);
         break;
     }
   }

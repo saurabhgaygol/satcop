@@ -905,14 +905,15 @@
                                 class="table table-hover">
                                 <tbody>
                                     <tr *ngFor="let work of fachdata; let i = index" style="text-align: center;">
-                                        <td style="padding: 5px;">{{ work.school_name }}</td>
-                                        <td style="padding: 5px;">{{ work.branch_name }}</td>
-                                        <td style="padding: 5px;">{{ work.work_type }}</td>
-                                        <td style="padding: 5px; max-width: 200px;">{{ work.work_description }}</td>
-                                        <td style="padding: 5px; font-size: 12px;">{{ work.handled_datetime }}</td>
-                                        <td style="padding: 5px; font-size: 12px;">{{ work.completed_datetime }}</td>
-                                        <td style="padding: 5px; font-size: 14px;">{{ work.work_handled_by }}</td>
-                                        <td style="padding: 5px;">{{ work.status }}</td>
+                                        <td class="tablealinment">{{ work.school_name }}</td>
+                                        <td class="tablealinment">{{ work.branch_name }}</td>
+                                        <td class="tablealinment">{{ work.work_type }}</td>
+                                        <td class="tablealinment" style="max-width: 200px;">{{
+                                            work.work_description }}</td>
+                                        <td class="tablealinment">{{ work.handled_datetime }}</td>
+                                        <td class="tablealinment">{{ work.completed_datetime }}</td>
+                                        <td class="tablealinment">{{ work.work_handled_by }}</td>
+                                        <td class="tablealinment">{{ work.status }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1009,6 +1010,7 @@
 
 
             </div>
+
         </div>
     </div>
 
@@ -1016,16 +1018,43 @@
 
 
 
-    <div class="container-fluid bg-black d-flex align-items-center sadowbox"
-        style="height: 40px; background-color: white; ">
-        <div class="row bg-black d-flex align-items-center">
-            <div class="text-center d-flex align-items-center" (click)="exportToExcel()" style="cursor: pointer;"
-                title="XLS Download">
-                <i class="fa-solid fa-arrow-down px-5 text-dark bi bi-star  " style="font-size: 10px;">
-                    <div class="bi bi-star text-dark " style="font-size: 8px;">XLS</div>
-                </i>
+    <div class="container-fluid bg-black d-flex sadowbox" style="height: 40px; background-color: white;  ">
+        <div class="row bg-black d-flex align-items-center " style="width: 100%;">
+            <div class="text-center d-flex align-items-center">
+
+                <div (click)="exportToExcel()" style="cursor: pointer;" title="XLS Download">
+                    <i class="fa-solid fa-arrow-down px-5 text-dark bi bi-star  " style="font-size: 10px;">
+                        <div class="bi bi-star text-dark " style="font-size: 8px;">XLS</div>
+                    </i>
+                </div>
+
+
+                <div class="container-fluid d-flex justify-content-center"
+                    style="position: fixed; width: calc(100% - 107px); z-index: 999;;">
+                    <form action="" class="d-flex" style="background: transparent;" (ngSubmit)="fiterdata()">
+                        <div class="d-flex align-items-center">
+                            <input type="text" placeholder="Enter something" [(ngModel)]="sarch" name="sarch"
+                                class="form-control h-75">
+                            <button type="submit" style="background: transparent; border: none; cursor: pointer;">
+                                <i class="fa-solid fa-magnifying-glass px-1"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+
+
+
+                <div style="padding-left: 90%;">
+                    <div class="bi bi-star text-dark px-1 "
+                        style="font-size: 12px; border: 1.5px solid black; padding: 1px;">
+                        {{fachdata.length}}</div>
+                </div>
 
             </div>
+
+
+
         </div>
     </div>
 

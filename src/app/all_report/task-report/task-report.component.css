@@ -11,3 +11,10 @@
     z-index: 999;
     border: 2px solid black;
 }
+
+.tablealinment {
+    padding: 5px;
+    font-size: 12px;
+    align-items: center;
+    align-content: center;
+}

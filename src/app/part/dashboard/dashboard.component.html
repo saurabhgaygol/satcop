@@ -1,24 +1,64 @@
 <div class="d-flex flex-column" style="height: 97vh; overflow: hidden;">
 
+
     <div class="container-fluid bg-black d-flex align-items-center sadowbox2"
         style="height: 40px; background-color: rgb(24, 23, 23);">
-        <h5 class="text-white m-0 px-3">Daily activity</h5>
+        <h5 class="text-white m-0 px-3">Dashboard</h5>
     </div>
 
 
-    <div class="flex-grow-1 overflow-auto p-3">
-        <div class="card text-bg-light mb-3" style="max-width: 18rem;">
-            <div class="card-header"><b>Pending Task</b></div>
-            <div class="card-body">
-                <h6 class="card-title" style="display: flex; justify-content: space-between;">
-                    <span>Total Tasks :</span>
-                    <span title={{lengthdata}}>{{lengthdata}}</span>
-                </h6>
+    <div class="flex-grow-1 overflow-auto">
+        <div class="container-fluid bg-black d-flex align-items-center" style="width: 100%;">
+            <div class="row" style="width: 100%;">
+
+                <div class="col-lg-3">
+                    <div class="p-3">
+                        <div class="card text-bg-light mb-3" style="max-width: 18rem; position: static !important;">
+                            <div class="card-header"><b>Total Task</b></div>
+                            <div class="card-body">
+                                <h6 class="card-title d-flex justify-content-between">
+                                    <span>Total Tasks :</span>
+                                    <span title={{totallengthdata}}>{{totallengthdata}}</span>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3">
+                    <div class="p-3">
+                        <div class="card text-bg-light mb-3" style="max-width: 18rem; position: static !important;">
+                            <div class="card-header"><b>Pending Task</b></div>
+                            <div class="card-body">
+                                <h6 class="card-title d-flex justify-content-between">
+                                    <span>Total Tasks :</span>
+                                    <span title={{lengthdata}}>{{lengthdata}}</span>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="p-3">
+                        <div class="card text-bg-light mb-3" style="max-width: 18rem; position: static !important;">
+                            <div class="card-header"><b>Done Task</b></div>
+                            <div class="card-body">
+                                <h6 class="card-title d-flex justify-content-between">
+                                    <span>Total Tasks :</span>
+                                    <span title={{donelengthdata}}>{{donelengthdata}}</span>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
-    </div>
 
+
+    </div>
 
     <div class="container-fluid d-flex align-items-center sadowbox"
         style="height: 40px; background-color: white; border-top: 1px solid #ccc;">

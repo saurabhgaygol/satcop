@@ -15,6 +15,7 @@ export class ManagerDashboardComponent {
 
 
   isSidebarOpen = false;
+  isSidebarOpen2 = false;
 
 
   //veriable
