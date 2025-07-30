@@ -1019,7 +1019,7 @@
 
 
     <div class="container-fluid bg-black d-flex sadowbox" style="height: 40px; background-color: white;  ">
-        <div class="row bg-black d-flex align-items-center " style="width: 100%;">
+        <div class="row bg-black d-flex align-items-center " style="width:100%; z-index: 999;">
             <div class="text-center d-flex align-items-center">
 
                 <div (click)="exportToExcel()" style="cursor: pointer;" title="XLS Download">
@@ -1029,12 +1029,11 @@
                 </div>
 
 
-                <div class="container-fluid d-flex justify-content-center"
-                    style="position: fixed; width: calc(100% - 107px); z-index: 999;;">
+                <div class="container-fluid d-flex justify-content-center" style="padding-left: 35%;">
                     <form action="" class="d-flex" style="background: transparent;" (ngSubmit)="fiterdata()">
                         <div class="d-flex align-items-center">
                             <input type="text" placeholder="Enter something" [(ngModel)]="sarch" name="sarch"
-                                class="form-control h-75">
+                                class="form-control h-75 " style="width: 30vh;">
                             <button type="submit" style="background: transparent; border: none; cursor: pointer;">
                                 <i class="fa-solid fa-magnifying-glass px-1"></i>
                             </button>
@@ -1045,7 +1044,7 @@
 
 
 
-                <div style="padding-left: 90%;">
+                <div style="padding-left: 30%;">
                     <div class="bi bi-star text-dark px-1 "
                         style="font-size: 12px; border: 1.5px solid black; padding: 1px;">
                         {{fachdata.length}}</div>
