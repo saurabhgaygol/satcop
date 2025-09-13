@@ -74,6 +74,10 @@ export class TaskReportComponent {
         this.donedata();
         break;
 
+      case 'collection':
+        this.donedata();
+        break;
+
       case 'Manager':
         break;
 

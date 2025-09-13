@@ -1,0 +1,8 @@
+{
+    "/webservice": {
+        "target": "https://15.207.194.31",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { SgpsalldataService } from '../services/sgpsalldata.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent {
   password: string = '';
   selectedFile: File | null = null;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private servicedata: SgpsalldataService) { }
 
   login() {
     const apiUrl = 'https://script.google.com/macros/s/AKfycbzYI8TauE28bNIqbJqJ5hY_o62GbaTnZd3EGotyvmVrs4p_JUYt6yo5M3zmppDgNvJJPg/exec';
@@ -35,11 +36,20 @@ export class LoginComponent {
         // Navigate based on role
         if (user.role === 'HR') {
           this.router.navigate(['/hr-dashboard']);
+
+
         } else if (user.role === 'Manager') {
           this.router.navigate(['/manager-dashboard']);
+          this.servicedata.getData2();
+
+
         } else if (user.role === 'Team') {
           this.router.navigate(['/team-dashboard']);
-        } else {
+        }
+        else if (user.role === 'collection') {
+          this.router.navigate(['/collection-team']);
+        }
+        else {
           alert('Unknown role');
         }
 

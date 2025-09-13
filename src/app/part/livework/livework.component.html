@@ -1,0 +1,27 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
+
+    <div class="card bg-white shadow p-4 rounded">
+        <h2 class="text-xl font-bold text-blue-700">HR</h2>
+        <div *ngFor="let user of hrUsers">
+            <p>{{ user.name }}</p>
+            <small class="text-gray-500">Live Work: {{ user.liveWork }}</small>
+        </div>
+    </div>
+
+    <div class="card bg-white shadow p-4 rounded">
+        <h2 class="text-xl font-bold text-green-700">Manager</h2>
+        <div *ngFor="let user of managerUsers">
+            <p>{{ user.name }}</p>
+            <small class="text-gray-500">Live Work: {{ user.liveWork }}</small>
+        </div>
+    </div>
+
+    <div class="card bg-white shadow p-4 rounded">
+        <h2 class="text-xl font-bold text-purple-700">Team</h2>
+        <div *ngFor="let user of teamUsers">
+            <p>{{ user.name }}</p>
+            <small class="text-gray-500">Live Work: {{ user.liveWork }}</small>
+        </div>
+    </div>
+
+</div>

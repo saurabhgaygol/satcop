@@ -14,6 +14,9 @@ import { IncrementletterComponent } from './part/incrementletter/incrementletter
 import { DayliteamworkComponent } from './part/dayliteamwork/dayliteamwork.component';
 import { TaskReportComponent } from './all_report/task-report/task-report.component';
 import { DashboardComponent } from './part/dashboard/dashboard.component';
+import { LiveworkComponent } from './part/livework/livework.component';
+import { CollectionTeamComponent } from './collection-team/collection-team.component';
+import { CollectiondataComponent } from './part/collectiondata/collectiondata.component';
 
 export const routes: Routes = [
   {
@@ -58,7 +61,9 @@ export const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'notification', component: NotificationComponent },
       { path: 'dayliteamwork', component: DayliteamworkComponent },
-      { path: 'task_report', component: TaskReportComponent }
+      { path: 'task_report', component: TaskReportComponent },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'livework', component: LiveworkComponent }
     ]
 
   },
@@ -73,6 +78,21 @@ export const routes: Routes = [
       { path: 'dayliteamwork', component: DayliteamworkComponent },
       { path: 'task_report', component: TaskReportComponent },
       { path: 'dashboard', component: DashboardComponent }
+    ]
+  },
+
+  {
+    path: 'collection-team',
+    canActivate: [authGuard],
+    component: CollectionTeamComponent,
+    data: { role: 'collection' },
+    children: [
+      { path: 'profile', component: ProfileComponent },
+      { path: 'notification', component: NotificationComponent },
+      { path: 'dayliteamwork', component: DayliteamworkComponent },
+      { path: 'task_report', component: TaskReportComponent },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'collection', component: CollectiondataComponent }
     ]
   },
 

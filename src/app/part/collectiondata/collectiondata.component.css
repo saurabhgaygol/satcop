@@ -1,0 +1,71 @@
+.loading-container {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    height: 25%;
+    z-index: 999;
+    border: 2px solid black;
+}
+
+.tablealinment {
+    padding: 5px;
+    font-size: 12px;
+    align-items: center;
+    align-content: center;
+    border-right: 0.5px solid rgb(121, 121, 121);
+}
+
+
+.comment-toast {
+    position: absolute;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    min-width: 250px;
+    z-index: 1000;
+}
+
+
+
+.backdrophai {
+    position: absolute;
+    top: 0;
+    left: 107px;
+    /* sidebar width छोड़ दो */
+    width: calc(100% - 107px);
+    /* बाकी full width ले */
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    /* dark transparent */
+    backdrop-filter: blur(2px);
+    /* blur effect */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+    /* sidebar के पीछे नहीं जाएगा */
+}
+
+.toastwed {
+    min-width: 700px;
+    height: 500px;
+    background: white;
+
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.footerhai {
+    margin-bottom: 0px;
+    min-width: 670px;
+    margin-top: 10px;
+
+    /* ✅ toast ke andar 490px ke baad footer */
+
+    background: #f8f9fa;
+
+}

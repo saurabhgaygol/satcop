@@ -1,0 +1,399 @@
+<div class="d-flex flex-column" style="height: 97vh; overflow: hidden;">
+    <div class="container-fluid bg-black d-flex align-items-center sadowbox2"
+        style="height: 40px; background-color: rgb(24, 23, 23); ">
+        <h5 class="text-white m-0 px-3">Collection Work </h5>
+    </div>
+
+    <div class="flex-grow-1 overflow-auto">
+        <div class="container-fluid" style="padding-left: 0%;">
+            <div class="row">
+                <div class="col-lg-12" style="padding-right: 0%;">
+
+
+                    <div style="border: 1px solid black; height: 86vh; display: flex; flex-direction: column;">
+
+                        <!-- Fixed Header Section -->
+                        <div style="background-color: #c4c0c0;">
+                            <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+                                <thead>
+                                    <tr style="border: 1px solid black; text-align: center;">
+                                        <th style="border: 1px solid black;">Manager</th>
+                                        <th style="border: 1px solid black;">Salesperson</th>
+                                        <th style="border: 1px solid black;">Invoice Id </th>
+                                        <th style="border: 1px solid black;">Company Name</th>
+                                        <th style="border: 1px solid black;">Total Amount</th>
+                                        <th style="border: 1px solid black;">Amount Received</th>
+                                        <th style="border: 1px solid black;">EP Date</th>
+                                        <th style="border: 1px solid black;">Pending Amount</th>
+                                        <th style="border: 1px solid black;">Payment Status</th>
+                                        <th style="border: 1px solid black;">Product Category</th>
+                                        <th style="border: 1px solid black;">Discription</th>
+                                        <th style="border: 1px solid black;">Probability</th>
+                                        <th style="border: 1px solid black;">Updated Id</th>
+                                        <th style="border: 1px solid black;">Updated Date</th>
+                                        <th style="border: 1px solid black;">Action</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                        <!-- Scrollable Body -->
+                        <div style="overflow-y: auto; flex-grow: 1;">
+                            <style>
+                                /* Hide scrollbar for WebKit */
+                                div::-webkit-scrollbar {
+                                    display: none;
+                                }
+
+                                /* Make sure cells wrap correctly */
+                                td {
+                                    word-wrap: break-word;
+                                    white-space: normal;
+                                    overflow-wrap: break-word;
+                                }
+                            </style>
+
+                            <table style="width: 100%; border-collapse: collapse; table-layout: fixed;"
+                                class="table table-hover">
+                                <tbody>
+                                    <tr *ngFor="let work of allcolectiondata; let i = index" style="text-align: center;"
+                                        (dblclick)="onRowClick(work, i)">
+                                        <td class="tablealinment">{{ work.Sales_Manager}}</td>
+                                        <td class="tablealinment">{{ work.Salesperson }}</td>
+                                        <td class="tablealinment">{{ work.Invoice_Id }}</td>
+                                        <td class="tablealinment" style="max-width: 200px;"
+                                            title="{{  work.Company_name}}">{{
+                                            work.Company_name }}</td>
+                                        <td class="tablealinment">{{ work.Total_Amount}}</td>
+                                        <td class="tablealinment">{{ work.Amount_Received }}</td>
+                                        <td class="tablealinment">{{ work.Expected_Date_of_payment }}</td>
+                                        <td class="tablealinment">{{ work.Pending_Amount }}</td>
+                                        <td class="tablealinment">{{ work.Payment_Status }}</td>
+                                        <td class="tablealinment">{{ work.Product_Category }}</td>
+                                        <td class="tablealinment">{{ work.Discription }}</td>
+                                        <td class="tablealinment">{{ work.Payment_Probability }}</td>
+                                        <td class="tablealinment">{{ work.Last_Updaed_Userid }}</td>
+                                        <td class="tablealinment">{{ work.Last_Updated_Date }}</td>
+                                        <td class="tablealinment">
+
+                                            <i class="fa-solid fa-comment" type="button" title="Comment"
+                                                (click)="openCommentToast($event, work.Uniq_Id)"></i>
+                                            @if(username==="kamini@satcop.com"){
+                                            <i class="fa-solid fa-trash ms-3" type="button" title="Delete"
+                                                (click)="deleteRecord(work.Uniq_Id); $event.stopPropagation()"></i>
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div *ngIf="selectedCommentId" class="position-absolute"
+                                [ngStyle]="{ top: toastPosition.top + 'px', left: toastPosition.left + 'px' }">
+
+                                <div class="toast show fade shadow" role="alert" aria-live="assertive"
+                                    aria-atomic="true">
+                                    <div class="toast-header">
+                                        <strong class="me-auto">Comments</strong>
+                                        <button type="button" class="btn-close" aria-label="Close"
+                                            (click)="selectedCommentId = null"></button>
+                                    </div>
+
+                                    <div class="toast-body" style="background-color: whitesmoke;">
+                                        <div class="d-flex mt-2 pb-3">
+                                            <input type="text" [(ngModel)]="newComment" placeholder="Add a comment"
+                                                class="form-control" />
+                                            <button class="btn btn-sm btn-primary ms-2"
+                                                (click)="addComment()">Save</button>
+                                        </div>
+
+                                        <!-- Show old comments -->
+                                        <div>
+                                            <div
+                                                style="border: 1px solid black; height: 250px; display: flex; flex-direction: column;">
+                                                <div style="background-color: #c4c0c0;">
+                                                    <table
+                                                        style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+                                                        <thead>
+                                                            <tr style="border: 1px solid black; text-align: center;">
+
+                                                                <th style="border: 1px solid black;">Comment</th>
+                                                                <th style="border: 1px solid black;">Date </th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+
+                                                <!-- Scrollable Body -->
+                                                <div style="overflow-y: auto; flex-grow: 1;">
+                                                    <style>
+                                                        /* Hide scrollbar for WebKit */
+                                                        div::-webkit-scrollbar {
+                                                            display: none;
+                                                        }
+
+                                                        /* Make sure cells wrap correctly */
+                                                        td {
+                                                            word-wrap: break-word;
+                                                            white-space: normal;
+                                                            overflow-wrap: break-word;
+                                                        }
+                                                    </style>
+
+                                                    <table
+                                                        style="width: 100%; border-collapse: collapse; table-layout: fixed;"
+                                                        class="table table-hover">
+                                                        <tbody>
+                                                            <tr *ngFor="let c of filteredComments"
+                                                                style="text-align: center;">
+
+                                                                <td class="tablealinment">{{ c.Comment}}</td>
+                                                                <td class="tablealinment">{{ c.Last_Updated_Date }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+        <div class="container-fluid bg-black d-flex sadowbox" style="height: 40px; background-color: white;  ">
+            <div class="row bg-black d-flex align-items-center " style="width:100%;">
+                <div class="text-center d-flex align-items-center">
+
+                    <div style="cursor: pointer;" title="XLS Download" (click)="downloadExcel()">
+                        <i class="fa-solid fa-arrow-down px-5 text-dark bi bi-star  " style="font-size: 10px;">
+                            <div class="bi bi-star text-dark " style="font-size: 8px;">XLS</div>
+                        </i>
+                    </div>
+
+
+                    <div class="container-fluid d-flex justify-content-center" style="padding-left: 35%;">
+                        <form action="" class="d-flex" style="background: transparent;" (ngSubmit)="Sarchdata()">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="Enter something" [(ngModel)]="sarch" name="sarch"
+                                    class="form-control h-75 " style="width: 30vh;">
+                                <button type="submit" style="background: transparent; border: none; cursor: pointer;">
+                                    <i class="fa-solid fa-magnifying-glass px-1"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+
+
+
+                    <div style="padding-left: 30%;">
+                        <div class="bi bi-star text-dark px-1 "
+                            style="font-size: 12px; border: 1.5px solid black; padding: 1px;">
+                            {{allcolectiondata.length}}
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div class="toast-backdrop backdrophai" *ngIf="isToastVisible">
+            <div class="toast show  toastwed" role="alert" aria-live="assertive" aria-atomic="true">
+
+                <!-- Header -->
+                <div class="toast-header">
+                    <strong class="me-auto">Company Name: {{selectedRecord?.Company_name}}</strong>
+                    <small>Just now</small>
+                    <button type="button" class="btn-close" (click)="closeToast()" aria-label="Close"></button>
+                </div>
+
+                <!-- Body -->
+                <div class="toast-body ">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-4 ">
+                                <strong>
+                                    Invoice no:
+                                    <input style="font-size: 12px; height: 20px;" type="text"
+                                        [value]="selectedRecord.Invoice_Id" readonly /> </strong>
+                            </div>
+                            <div class="col-4">
+                                <strong> Salesperson:
+                                    <input style="font-size: 12px; height: 20px;" type="text"
+                                        [value]="selectedRecord.Salesperson" readonly /></strong>
+                            </div>
+                            <div class="col-3 ">
+
+
+
+                                <strong>Payment Probability<span style="color: red;">*</span>:
+                                    <select
+                                        style="font-size: 12px; height: 20px; border: none; border: 1px solid black; width: 100%;"
+                                        [(ngModel)]="selectedRecord.Payment_Probability">
+
+                                        <option value="">--Select--</option>
+                                        <option value="Positive">Positive</option>
+                                        <option value="Negative">Negative</option>
+                                        <option value="Neutral">Neutral</option>
+                                    </select>
+                                </strong>
+
+
+
+                            </div>
+
+                        </div>
+                        <div class="row py-4">
+                            <div class="col-4 ">
+                                <strong>Total Amount<span style="color: red;">*</span>:
+                                    <input style="font-size: 12px; height: 20px;" type="number"
+                                        [(ngModel)]="selectedRecord.Total_Amount"></strong>
+
+                            </div>
+                            <div class="col-4 ">
+
+                                <strong>Amount Received<span style="color: red;">*</span>:
+                                    <input style="font-size: 12px; height: 20px;" type="number"
+                                        [(ngModel)]="selectedRecord.Amount_Received"></strong>
+
+                            </div>
+                            <div class="col-3">
+
+
+
+
+                                <strong> Pending Amount:
+                                    <input style="font-size: 12px; height: 20px;" type="text"
+                                        [(ngModel)]="pendingAmount" readonly /></strong>
+
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="row py-3">
+                            <div class="col-4 ">
+                                <strong>
+                                    Expected Date of payment <span style="color: red;">*</span>:
+                                    <div style="position: relative; display: inline-block;">
+
+                                        <!-- Visible Textbox (shows dd/MM/yyyy) -->
+                                        <input style="font-size: 12px; height: 20px; padding-right: 25px; width: 140px;"
+                                            type="text" [(ngModel)]="selectedRecord.Expected_Date_of_payment"
+                                            readonly />
+
+                                        <!-- Calendar Input (transparent over icon) -->
+                                        <input type="date"
+                                            style="position: absolute; right: 0; top: 0; bottom: 0; opacity: 0; width: 25px; cursor: pointer;"
+                                            (change)="onDateChange($event)" />
+
+                                        <!-- Calendar Icon -->
+                                        <span
+                                            style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%); pointer-events: none;">
+                                            <i class="fa-regular fa-calendar" style="pointer-events: none;"></i>
+                                        </span>
+                                    </div>
+                                </strong>
+
+
+
+                            </div>
+                            <div class="col-4 ">
+                                <strong> Payment Status:
+                                    <input style="font-size: 12px; height: 20px;" type="text"
+                                        [(ngModel)]="this.selectedRecord.Payment_Status" readonly /></strong>
+                            </div>
+                            <div class=" col-3">
+
+                                <strong>Product Category<span style="color: red;">*</span>:
+                                    <select
+                                        style="font-size: 12px; height: 20px; border: none; border: 1px solid black; width: 100%;"
+                                        [(ngModel)]="selectedRecord.Product_Category">
+
+                                        <option value="">--Select--</option>
+                                        <option value="Software">Software</option>
+                                        <option value="Hardware">Hardware</option>
+                                        <option value="Software/Hardware">Software/Hardware</option>
+                                    </select>
+                                </strong>
+
+                            </div>
+                        </div>
+                        <div class="row py-3">
+                            <div class="col-4 ">
+
+                                <strong> Discription<span style="color: red;">*</span>:
+                                    <textarea style="font-size: 12px; height: 150px; width: 300px;" type="textarea"
+                                        [(ngModel)]="selectedRecord.Discription"></textarea>
+                                </strong>
+                            </div>
+
+
+
+
+
+
+
+                            <!-- ✅ Footer -->
+                            <div class=" toast-footer footerhai d-flex p-2 border-top">
+                                <i class="fa-solid fa-floppy-disk fs-5 px-2 " title="Save" type="submit"
+                                    style="align-content: center;" (click)="this.selectedRecord.Payment_Status = this.paymentstutas;
+      this.selectedRecord.Pending_Amount = (this.paymentstutas === 'Paid') ? 0 : this.pendingAmount;
+      updateddata()"></i>
+                                <i class="fa fa-ban px-2 " title="Void Bill" type="button"
+                                    style="color: red; font-size: 17px; align-content: center;"
+                                    (click)="selectedRecord.Payment_Status='Void'; updateddata()"></i>
+
+                                <i class="fa-solid fa-thumbs-up px-2"
+                                    style="color: green; font-size: 20px; align-content: center;" title="Paid Bill"
+                                    type="button"
+                                    (click)="selectedRecord.Amount_Received=selectedRecord.Total_Amount;this.selectedRecord.Pending_Amount=0;selectedRecord.Payment_Status = this.paymentstutas; updateddata()"></i>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
